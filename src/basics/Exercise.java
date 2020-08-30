@@ -15,7 +15,7 @@ package basics;
 public class Exercise {
     // Create an array
     private final static int SIZE = 15;
-    private int[] arrayOfInts = new int[SIZE];
+    private static int[] arrayOfInts = new int[SIZE];
 
     public Exercise() {
         // fill the array with ascending integer values
@@ -24,8 +24,14 @@ public class Exercise {
         }
     }
 
-    public void printEven() {
+    public void print(ExerciseIterator iterator){
+        while(iterator.hasNext()){
+            System.out.print(iterator.next()+ " ");
+        }
 
+        System.out.println();
+    }
+    public void printEven() {
         // Print out values of even indices of the array
         ExerciseIterator iterator = this.new EvenIterator();
         while (iterator.hasNext()) {
@@ -34,7 +40,10 @@ public class Exercise {
         System.out.println();
     }
 
-    interface ExerciseIterator extends java.util.Iterator<Integer> { }
+    interface ExerciseIterator extends java.util.Iterator<Integer> {
+        boolean hasNext();
+        Integer next();
+    }
 
     // Inner class implements the ExerciseIterator interface,
     // which extends the Iterator<Integer> interface
@@ -53,7 +62,7 @@ public class Exercise {
         public Integer next() {
 
             // Record a value of an even index of the array
-            Integer retValue = Integer.valueOf(arrayOfInts[nextIndex]);
+            Integer retValue = arrayOfInts[nextIndex];
 
             // Get the next even element
             nextIndex += 2;
@@ -61,11 +70,30 @@ public class Exercise {
         }
     }
 
-    public static void main(String s[]) {
+    public static void main(String[] args) {
 
         // Fill the array with integer values and print out only
         // values of even indices
         Exercise ds = new Exercise();
         ds.printEven();
+
+        ds.print(ds.new EvenIterator());
+        ds.print(new ExerciseIterator() {
+            int nextIndex = 1;
+
+            public boolean hasNext() {
+                // Check if the current element is the last in the array
+                return (nextIndex <= SIZE - 1);
+            }
+
+            public Integer next() {
+                // Record a value of an even index of the array
+                Integer retValue = arrayOfInts[nextIndex];
+
+                // Get the next even element
+                nextIndex += 2;
+                return retValue;
+            }
+        });
     }
 }

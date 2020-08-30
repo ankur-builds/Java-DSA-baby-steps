@@ -9,17 +9,44 @@
 package basics;
 
 public interface TryInterface {
-    public void print_hello();
+    void print_hello();
+
+    static void print_world() {
+        System.out.println("static method");
+    }
+
+    default void test_default() {
+        System.out.println("Starting point");
+    }
 }
 
+interface xyz{}
+
 class A implements TryInterface{
+    public A(TryInterface variable) {
+        System.out.println("#Hello A");
+    }
+
+    public A() {
+
+    }
+
     @Override
     public void print_hello() {
         System.out.println("Hello A");
     }
+
+    @Override
+    public void test_default() {
+        System.out.println("Override complete");
+    }
 }
 
 class B implements TryInterface{
+    public B(TryInterface variable) {
+        System.out.println("#Hello B");
+    }
+
     @Override
     public void print_hello() {
         System.out.println("Hello B");
@@ -27,6 +54,10 @@ class B implements TryInterface{
 }
 
 class C implements TryInterface{
+    public C(TryInterface variable) {
+        System.out.println("#Hello C");
+    }
+
     @Override
     public void print_hello() {
         System.out.println("Hello C");

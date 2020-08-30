@@ -1,8 +1,8 @@
 /*
  * Copyright (c) 2020.
- * File : StringOps.java
+ * File : Queue.java
  * Author : Ankur
- * Last modified : 19/7/2020
+ * Last modified : 15/8/2020
  * Problem Statement at the end of the code
  *
  * All code is for practice purpose only and strictly non-commercial.
@@ -10,12 +10,7 @@
  * Please refer to apache license terms in the project.
  */
 
-package basics;
+package dsa;
 
-public class StringOps {
-    public static void main(String[] args){
-        System.out.println("Hello World");
-        TryInterface x = new A();
-        x.print_hello();
-    }
+public class Queue {
 }
