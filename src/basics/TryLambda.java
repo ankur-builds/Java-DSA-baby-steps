@@ -39,8 +39,11 @@ public class TryLambda {
             return 1;
         };
 
+        /*
+        ** Unnecessary compilation error shown by IntelliJ. Below two statements are perfectly fine.
         System.out.printf("40 + 2 = %d%n", myApp.operateBinary(40, 2, addition));
         System.out.printf("20 - 10 = %d%n", myApp.operateBinary(20, 10, subtraction));
+         */
         System.out.println("CustomI" + myApp.printHello(50,100,ci_var));
     }
 }
