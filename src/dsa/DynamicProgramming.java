@@ -50,7 +50,7 @@ public class DynamicProgramming {
     /*
     Dynamic Programming Approach
     Recomputations of same subproblems can be avoided by constructing a
-    temporary array K[][] in bottom-up manner.
+    temporary array table[][] in bottom-up manner.
     Watch this video => https://www.youtube.com/watch?v=8LusJS5-AGo
      */
     public static int dynamicProgrammingMethod(int capacity, int[] weight, int[] value, int n){
