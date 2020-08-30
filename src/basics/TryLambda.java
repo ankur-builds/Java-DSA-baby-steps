@@ -12,8 +12,6 @@
 
 package basics;
 
-import java.io.PrintStream;
-
 public class TryLambda {
     interface IntegerMath {
         int operation(int a, int b);
