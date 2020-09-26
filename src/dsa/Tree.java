@@ -17,14 +17,14 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Tree {
-    Node root;
-    int size;
-    int height;
+    public Node root;
+    public int size;
+    public int height;
 
-    static class Node{
-        int data;
-        Node left;
-        Node right;
+    public static class Node{
+        public int data;
+        public Node left;
+        public Node right;
 
         Node(int d){
             data = d;
@@ -50,7 +50,7 @@ public class Tree {
     }
 
     // (Left, root, right)
-    void inorderTraversal(Node n) {
+    public void inorderTraversal(Node n) {
         if (n==null)
             return;
 
@@ -60,7 +60,7 @@ public class Tree {
     }
 
     // (Root, left, right)
-    void preorderTraversal(Node n) {
+    public void preorderTraversal(Node n) {
         if (n==null)
             return;
 
@@ -70,7 +70,7 @@ public class Tree {
     }
 
     // (Left, right, root)
-    void postorderTraversal(Node n) {
+    public void postorderTraversal(Node n) {
         if (n==null)
             return;
 
@@ -80,7 +80,7 @@ public class Tree {
     }
 
     // Print level by level
-    void levelorderTraversal(Node n){
+    public void levelorderTraversal(Node n){
         java.util.Queue<Node> var = new LinkedList<>();
 
         var.add(n);
@@ -177,7 +177,7 @@ public class Tree {
     }
 
     // Here nodes are added as and when they arrive. Unorderded tree.
-    void addNode(int d){
+    public void addNode(int d){
         System.out.print(d + " ");
         if(root == null) {
             root = new Node(d);
