@@ -23,15 +23,22 @@ public class Queue {
             data = d;
             next = null;
         }
-
     }
     void enqueue(int d){
         if(front == null) {
-            front = new Node(d);
-            end = front;
+            end = front = new Node(d);
         } else {
             // Here unlike stack we are adding new node at the end.
             end.next = new Node(d);
+            end = end.next;
+        }
+    }
+
+    void enqueue(Node n){
+        if(front == null){
+            end = front = n;
+        } else {
+            end.next = n;
             end = end.next;
         }
     }
@@ -74,15 +81,14 @@ public class Queue {
         qu.enqueue(30);
         qu.enqueue(40);
 
+        Node k = new Node(50);
+        qu.enqueue(k);
+
         System.out.println("Length : " + qu.size());
         System.out.println("Is Queue empty : " + qu.isEmpty());
 
         System.out.println("Front : " + qu.front() + " Rear : " + qu.rear());
-        System.out.println(qu.dequeue());
-        System.out.println(qu.dequeue());
-        System.out.println(qu.dequeue());
-        System.out.println(qu.dequeue());
-
-        System.out.println("Is Queue empty : " + qu.isEmpty());
+        while(!qu.isEmpty())
+            System.out.println(qu.dequeue());
     }
 }

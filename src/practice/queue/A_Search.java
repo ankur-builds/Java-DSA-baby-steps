@@ -11,7 +11,10 @@
  */
 
 package practice.queue;
+import java.util.*;
 
 // https://www.geeksforgeeks.org/a-search-algorithm/
 public class A_Search {
+    public static void main(String[] args) {
+    }
 }
