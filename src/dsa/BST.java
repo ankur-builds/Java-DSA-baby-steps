@@ -13,12 +13,12 @@
 package dsa;
 
 public class BST {
-    Tree.Node root;
+    Node root;
 
     static class Node{
         int data;
-        Tree.Node left;
-        Tree.Node right;
+        Node left;
+        Node right;
 
         Node(int d){
             data = d;
@@ -29,20 +29,20 @@ public class BST {
     void addNode(int d){
         System.out.print(d + " ");
         if(root == null) {
-            root = new Tree.Node(d);
+            root = new Node(d);
             return;
         }
-        Tree.Node n = root;
+        Node n = root;
         while(true){
             if(d <= n.data){
                 if(n.left == null) {
-                    n.left = new Tree.Node(d);
+                    n.left = new Node(d);
                     return;
                 } else
                     n = n.left;
             } else {
                 if(n.right == null){
-                    n.right = new Tree.Node(d);
+                    n.right = new Node(d);
                     return;
                 } else
                     n = n.right;

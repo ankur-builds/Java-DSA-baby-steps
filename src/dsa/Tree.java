@@ -96,26 +96,27 @@ public class Tree {
                 var.add(n.right);
         }
     }
+    void inorderTraversalWithoutRecursion(){
+        java.util.Stack<Node> st = new java.util.Stack<Node>();
+        Node current = root;
+        while(current!=null || st.size()>0){
+            while(current!=null){
+                st.push(current);
+                current = current.left;
+            }
 
-    void insertionInLevelOrder(Node n){
-        java.util.Queue<Node> var = new LinkedList<>();
-        var.add(root);
+            current = st.pop();
+            System.out.print(current.data + " ");
 
-        while(!var.isEmpty()){
-            Node k = var.poll();
-
-            if(k.left==null) {
-                k.left = n;
-                return;
-            } else
-                var.add(k.left);
-
-            if(k.right==null) {
-                k.right = n;
-                return;
-            }else
-                var.add(k.right);
+            current = current.right;
         }
+    }
+
+    /* Function to traverse a binary tree without recursion and
+       without stack */
+    void doMorrisTraversal(){
+        Node n = root;
+
     }
 
     void substituteNode(int d){
@@ -217,7 +218,7 @@ public class Tree {
         treeNode.treeTraversal();
 
         System.out.println("---------------------------");
-        treeNode.insertionInLevelOrder(new Node(200));
+        treeNode.addNode(200);
         treeNode.treeTraversal();
 
         System.out.println("---------------------------");
@@ -228,5 +229,11 @@ public class Tree {
         treeNode.substituteNode(k);
         treeNode.treeTraversal();
         System.out.println("Size : " + treeNode.size + " Height : " + treeNode.height);
+        System.out.println("---------------------------");
+
+        System.out.print("Inorder Traversal : ");
+        treeNode.inorderTraversal(treeNode.root);
+        System.out.print("\nInorder Traversal without Recursion : ");
+        treeNode.inorderTraversalWithoutRecursion();
     }
 }
