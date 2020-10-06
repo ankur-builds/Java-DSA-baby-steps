@@ -14,6 +14,7 @@ package dsa;
 
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Tree {
@@ -26,7 +27,7 @@ public class Tree {
         public Node left;
         public Node right;
 
-        Node(int d){
+        public Node(int d){
             data = d;
             left = right = null;
         }
@@ -34,7 +35,7 @@ public class Tree {
 
     void treeTraversal()
     {
-        System.out.print("Inorder Traversal : ");
+        System.out.print("\nInorder Traversal : ");
         inorderTraversal(root);
 
         System.out.print("\nPreorder Traversal : ");
@@ -97,7 +98,7 @@ public class Tree {
         }
     }
     void inorderTraversalWithoutRecursion(){
-        java.util.Stack<Node> st = new java.util.Stack<Node>();
+        Stack<Node> st = new Stack<>();
         Node current = root;
         while(current!=null || st.size()>0){
             while(current!=null){
@@ -113,10 +114,36 @@ public class Tree {
     }
 
     /* Function to traverse a binary tree without recursion and
-       without stack */
+       without stack
+       https://www.youtube.com/watch?v=wGXB9OWhPTg
+    */
     void doMorrisTraversal(){
-        Node n = root;
+        Node current = root;
+        while(current!=null){
+            if(current.left==null){
+                // If left child is null, print current node and go to right child
+                System.out.print(current.data + " ");
+                current = current.right;
+            } else {
+                Node predecessor = current.left;
+                // Find predecessor of current and let it point to current
+                while(predecessor.right!=null && predecessor.right != current){
+                    predecessor = predecessor.right;
+                }
 
+                if(predecessor.right != current){
+                    // Move on to left child of current.
+                    predecessor.right = current;
+                    current = current.left;
+                } else{
+                    // If we have already visited the predecessor then that will lead to a loop
+                    // hence remove right child link to current and print current node
+                    predecessor.right = null;
+                    System.out.print(current.data + " ");
+                    current = current.right;
+                }
+            }
+        }
     }
 
     void substituteNode(int d){
@@ -235,5 +262,7 @@ public class Tree {
         treeNode.inorderTraversal(treeNode.root);
         System.out.print("\nInorder Traversal without Recursion : ");
         treeNode.inorderTraversalWithoutRecursion();
+        System.out.print("\nDo Morris Traversal : ");
+        treeNode.doMorrisTraversal();
     }
 }

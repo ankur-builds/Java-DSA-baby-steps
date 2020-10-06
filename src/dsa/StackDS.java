@@ -12,27 +12,27 @@
 
 package dsa;
 
-public class Stack {
+public class StackDS<E> {
     Node root;
 
-    static class Node{
-        int data;
+    class Node{
+        E data;
         Node next;
 
-        Node (int d){
+        Node (E d){
             data = d;
             next = null;
         }
     }
 
-    void push(int data) {
+    void push(E data) {
         Node temp = root;
         root = new Node(data);
         root.next = temp;
     }
 
-    int pop(){
-        int value = 0;
+    E pop(){
+        E value = null;
         if(root!=null) {
             value = root.data;
             root = root.next;
@@ -40,17 +40,15 @@ public class Stack {
         return value;
     }
 
-    int peep(){
-        if(root!=null)
-            return root.data;
-        else return 0;
+    E peep(){
+        return root.data;
     }
 
     boolean isEmpty(){
         return (root==null);
     }
 
-    int search(int key){
+    int search(E key){
         Node n = root;
         int count = 0;
         while(n!=null){
@@ -75,7 +73,7 @@ public class Stack {
     }
 
     public static void main(String[] args) {
-        Stack st = new Stack();
+        StackDS<Integer> st = new StackDS<>();
 
         st.push(10);
         st.push(20);

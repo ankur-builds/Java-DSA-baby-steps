@@ -12,7 +12,7 @@
 
 package dsa;
 
-public class Queue {
+public class QueueDS {
     Node front;
     Node end;
 
@@ -75,7 +75,7 @@ public class Queue {
         return count;
     }
     public static void main(String[] args) {
-        Queue qu = new Queue();
+        QueueDS qu = new QueueDS();
         qu.enqueue(10);
         qu.enqueue(20);
         qu.enqueue(30);

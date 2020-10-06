@@ -68,13 +68,13 @@ public class ConvertIntoQueue {
             System.out.print(var.pop()+" ");
 
         System.out.println();
-        System.out.println("Enqueue in time : " + System.nanoTime());
         ConvertIntoQueue k = new ConvertIntoQueue();
+        long t1 = System.nanoTime();
         k.enqueue(10);
         k.enqueue(20);
         k.enqueue(30);
-        System.out.println("Enqueue end time : " + System.nanoTime());
+        System.out.println("Enqueue end time : " + (System.nanoTime() - t1)/1000);
         System.out.println(k.dequeue() + " " + k.dequeue() + " " + k.dequeue());
-        System.out.println("Dequeue end time : " + System.nanoTime());
+        System.out.println("Dequeue end time : " + (System.nanoTime() - t1)/1000);
     }
 }

@@ -12,7 +12,7 @@
 
 package dsa;
 
-public class LinkedList {
+public class LinkedListDS {
     Node head;
 
     static class Node{
@@ -113,7 +113,7 @@ public class LinkedList {
     }
 
     public static void main(String[] args) {
-        LinkedList ll = new LinkedList();
+        LinkedListDS ll = new LinkedListDS();
 
         ll.head = new Node(20);
 
