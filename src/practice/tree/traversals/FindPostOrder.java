@@ -12,8 +12,6 @@
 
 package practice.tree.traversals;
 
-import java.util.Stack;
-
 public class FindPostOrder{
     static int preIndex = 0;
 
