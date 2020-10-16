@@ -60,7 +60,10 @@ public class LevelOrder {
         Queue<BST.Node> q1 = new LinkedList<>();
         q.add(n);
 
+        // Here we will be saving nodes of each level in alternate queue.
+        // Time complexity will remain O(n) despite two while loops as number of nodes visited is n
         while(!q.isEmpty() || !q1.isEmpty()){
+            // Iterate over first queue
             while(!q.isEmpty()){
                 n = q.poll();
                 System.out.print(n.data + " ");
@@ -72,6 +75,7 @@ public class LevelOrder {
 
             System.out.println();
 
+            // Move over second level
             while(!q1.isEmpty()){
                 n = q1.poll();
                 System.out.print(n.data+" ");
@@ -103,9 +107,9 @@ public class LevelOrder {
             } else{
                 System.out.println();
                 if(q.isEmpty())
-                    return;
+                    return; // Important to come out of final loop else it will be an infinite loop
                 else
-                    q.add(null);
+                    q.add(null); // This will act as next level delimiter
             }
         }
     }

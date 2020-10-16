@@ -53,6 +53,7 @@ public class BST {
         }
     }
 
+    // Print each level of tree line by line
     public void printLevelOrderTraversal(Node n){
         Queue<Node> q = new LinkedList<>();
         q.add(n);
