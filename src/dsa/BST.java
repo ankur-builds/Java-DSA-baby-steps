@@ -12,21 +12,24 @@
 
 package dsa;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BST {
-    Node root;
+    public Node root;
 
-    static class Node{
-        int data;
-        Node left;
-        Node right;
+    public static class Node{
+        public int data;
+        public Node left;
+        public Node right;
 
-        Node(int d){
+        public Node(int d){
             data = d;
             left = right = null;
         }
     }
 
-    void addNode(int d){
+    public void addNode(int d){
         System.out.print(d + " ");
         if(root == null) {
             root = new Node(d);
@@ -34,7 +37,7 @@ public class BST {
         }
         Node n = root;
         while(true){
-            if(d <= n.data){
+            if(d < n.data){
                 if(n.left == null) {
                     n.left = new Node(d);
                     return;
@@ -50,6 +53,29 @@ public class BST {
         }
     }
 
+    public void printLevelOrderTraversal(Node n){
+        Queue<Node> q = new LinkedList<>();
+        q.add(n);
+        q.add(null);  // Awesome idea to use null as tree level delimiter
+
+        while (!q.isEmpty()){
+            n = q.poll();
+
+            if(n!=null){
+                System.out.print(n.data + " ");
+                if(n.left!=null)
+                    q.add(n.left);
+                if(n.right!=null)
+                    q.add(n.right);
+            } else{
+                System.out.println();
+                if(q.isEmpty())
+                    return;
+                else
+                    q.add(null);
+            }
+        }
+    }
     public static void main(String[] args) {
 
     }
