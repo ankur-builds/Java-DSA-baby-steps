@@ -20,8 +20,7 @@ public class BST {
 
     public static class Node{
         public int data;
-        public Node left;
-        public Node right;
+        public Node left, right;
 
         public Node(int d){
             data = d;
