@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class QToStack {
+public class StackUsingQueue {
     Queue<Integer> q1 = new LinkedList<>();
 
     void push(int d) {
@@ -37,7 +37,7 @@ public class QToStack {
     }
 
     public static void main(String[] args) {
-        QToStack temp = new QToStack();
+        StackUsingQueue temp = new StackUsingQueue();
 
         System.out.print("Input : ");
         for (int i = 1; i <= 10; ++i) {
