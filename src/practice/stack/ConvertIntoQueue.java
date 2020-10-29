@@ -13,27 +13,12 @@
 package practice.stack;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ConvertIntoQueue {
-    Stack<Integer> original;
-    Stack<Integer> duplicate;
+    Stack<Integer> original = new Stack<>();
+    Stack<Integer> duplicate = new Stack<>();
 
-    ConvertIntoQueue(){
-        original = new Stack<>();
-        duplicate = new Stack<>();
-    }
-    /*
-    Stack -- LIFO
-    Queue -- FIFO
-
-    Stack to Queue
-    Input : Stack
-    Output : FIFO
-
-    Approach 1 : Add element to top of stack.
-    While removing use iterator and get first element to return
-    May have copy entire stack element except 1st to another stack and retransfer back? O(2*n)
-     */
     void enqueue(int data){
         original.push(data);
     }
@@ -54,27 +39,17 @@ public class ConvertIntoQueue {
         return x;
     }
     public static void main(String[] args) {
-        Stack<String> var = new Stack<>();
-        Collections.addAll(var, "Lets", "try", "to", "convert", "stack", "to", "queue");
-
-        Iterator<String> it = var.iterator();
-        System.out.print("Stack to Queue : ");
-        while(it.hasNext())
-            System.out.print(it.next() + " ");
-
-        System.out.println();
-        System.out.print("Original Stack : ");
-        while(!var.isEmpty())
-            System.out.print(var.pop()+" ");
-
-        System.out.println();
         ConvertIntoQueue k = new ConvertIntoQueue();
-        long t1 = System.nanoTime();
-        k.enqueue(10);
-        k.enqueue(20);
-        k.enqueue(30);
-        System.out.println("Enqueue end time : " + (System.nanoTime() - t1)/1000);
-        System.out.println(k.dequeue() + " " + k.dequeue() + " " + k.dequeue());
-        System.out.println("Dequeue end time : " + (System.nanoTime() - t1)/1000);
+        System.out.print("Input : ");
+        for(int i = 1; i<=10; ++i){
+            int val = ThreadLocalRandom.current().nextInt(5,45);
+            System.out.print(val + " ");
+            k.enqueue(val);
+        }
+
+        System.out.print("\nOutput : ");
+        for (int i = 1; i<=10; ++i){
+            System.out.print(k.dequeue()+" ");
+        }
     }
 }
