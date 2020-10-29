@@ -47,7 +47,6 @@ public class QToStack {
         }
 
         System.out.print("\nOutput : ");
-
         for (int i = 1; i <= 10; ++i) {
             System.out.print(temp.pop() + " ");
         }
