@@ -15,7 +15,7 @@ package practice.stack;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ConvertIntoQueue {
+public class QueueUsingStack {
     Stack<Integer> original = new Stack<>();
     Stack<Integer> duplicate = new Stack<>();
 
@@ -39,7 +39,7 @@ public class ConvertIntoQueue {
         return x;
     }
     public static void main(String[] args) {
-        ConvertIntoQueue k = new ConvertIntoQueue();
+        QueueUsingStack k = new QueueUsingStack();
         System.out.print("Input : ");
         for(int i = 1; i<=10; ++i){
             int val = ThreadLocalRandom.current().nextInt(5,45);
