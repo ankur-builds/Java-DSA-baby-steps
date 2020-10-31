@@ -78,6 +78,7 @@ public class InfixToPostfix {
             } else if(ch == ')'){
                 char temp = stk.pop();
                 while(temp!='(') {
+                    // Keep popping operators until we reach '('
                     System.out.print(temp + " ");
                     temp = stk.pop();
                 }
