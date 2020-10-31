@@ -63,7 +63,7 @@ public class InfixToPostfix {
                     // Stack is not empty. It will contain operators. Compare them
                     if(precedence(ch) <= precedence(stk.peek())){
                         while(!stk.isEmpty()){
-                            // Stack is empty is required to avoid exception during stk.peek()
+                            // Stack is empty check is required to avoid exception during stk.peek()
                             if (precedence(ch)<=precedence(stk.peek()))
                                 // Scanned operator has lower precedence, keep popping operators in stack
                                 System.out.print(stk.pop() + " ");
