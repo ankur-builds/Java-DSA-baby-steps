@@ -2,7 +2,7 @@
  * Copyright (c) 2020.
  * File : Graph.java
  * Author : Ankur
- * Last modified : 15/8/2020
+ * Last modified : 17/11/2020
  * Problem Statement at the end of the code
  *
  * All code is for practice purpose only and strictly non-commercial.
@@ -15,12 +15,10 @@ package dsa;
 import java.util.*;
 
 public class Graph {
-    int num_nodes;
     byte[][] adjacencyMatrix;
     ArrayList<ArrayList<Integer>> adjacencyList;
 
     Graph(int v){
-        num_nodes = v;
         adjacencyList = new ArrayList<>();
         for(int i = 1; i<=v; ++i){
             adjacencyList.add(new ArrayList<>());
@@ -29,7 +27,6 @@ public class Graph {
     }
 
     Graph(int v, byte[][] matrix){
-        num_nodes = v;
         adjacencyList = new ArrayList<>();
         for(int i = 1; i<=v; ++i){
             adjacencyList.add(new ArrayList<>());
@@ -76,17 +73,24 @@ public class Graph {
         boolean[] visited = new boolean[adjacencyList.size()];
         Stack<Integer> stk = new Stack<>();
 
-        visited[n] = true;
         stk.push(n);
-
         while(!stk.isEmpty()) {
             n = stk.pop();
-            System.out.print(n + " ");
+
+            if(!visited[n]) {
+                visited[n] = true;
+                System.out.print(n + " ");
+            }
+
+            /*
+            If you don't reverse adjacency list of corresponding node.
+            Then also it will do DFS but from last node. Output will be different
+            from what we get from recursive solution.
+             */
+            Collections.reverse(adjacencyList.get(n));
             for (int i : adjacencyList.get(n)) {
                 if (!visited[i]) {
-                    visited[i] = true;
                     stk.push(i);
-                    break;
                 }
             }
         }
@@ -135,17 +139,23 @@ public class Graph {
 
     public static void main(String[] args) {
         Graph input = new Graph(5);
+
         input.addEdge(0,1);
-        input.addEdge(0,4);
+        input.addEdge(0,2);
         input.addEdge(1,2);
         input.addEdge(1,3);
         input.addEdge(1,4);
         input.addEdge(2,3);
         input.addEdge(3,4);
-
+        /*
+        input.addEdge(0,1);
+        input.addEdge(0,2);
+        input.addEdge(0,3);
+        input.addEdge(0,4);
+*/
         input.printGraph();
-        input.doBFS(4);
-        input.doDFS(4);
-        input.recursiveDFS(4);
+        input.doBFS(0);
+        input.doDFS(0);
+        input.recursiveDFS(0);
     }
 }
