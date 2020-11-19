@@ -202,6 +202,6 @@ public class Graph {
         }
 
         // Kosaraju's Strongly Connected Component Algorithm. Time complexity : O(V+E)
-        // System.out.println(input.kosaraju());
+        System.out.println(input.kosaraju());
     }
 }
