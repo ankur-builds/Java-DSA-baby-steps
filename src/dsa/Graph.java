@@ -142,7 +142,11 @@ public class Graph {
         
         return count==size()?n:-1;
     }
-    
+
+    int kosaraju(){
+        return 1;
+    }
+
     /*
     The outer loop is executed O(|V|) regardless of the graph structure.
         - Even if we had no edges at all, for every iteration of the outer loop, we would have

@@ -16,7 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ReverseIterator<T> implements Iterator<T>, Iterable<T> {
-
     private final List<T> list;
     private int position;
 
@@ -44,5 +43,4 @@ public class ReverseIterator<T> implements Iterator<T>, Iterable<T> {
     public void remove() {
         throw new UnsupportedOperationException();
     }
-
 }
