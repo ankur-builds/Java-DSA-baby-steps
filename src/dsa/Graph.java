@@ -40,14 +40,13 @@ public class Graph {
     }
 
     void addNode(){
-        // This will be adjacencyList.size() + 1 th node
+        // This will be size() + 1 th node
         adjacencyList.add(new ArrayList<>());
     }
 
+    // Perform Breadth First Search. Time complexity : O(V+E)
     void doBFS(int n){
-        System.out.println("Breadth First Traversal. Time complexity : O(V+E)");
-
-        boolean[] visited = new boolean[adjacencyList.size()];
+        boolean[] visited = new boolean[size()];
         Queue<Integer> next = new LinkedList<>();
 
         next.add(n);
@@ -63,46 +62,46 @@ public class Graph {
                 }
             }
         }
-
-        System.out.println();
     }
 
+    // Perform Depth First Search. Time complexity : O(V+E)
     void doDFS(int n){
-        System.out.println("Depth First Traversal. Time complexity : O(V+E)");
-
-        boolean[] visited = new boolean[adjacencyList.size()];
+        boolean[] visited = new boolean[size()];
         Stack<Integer> stk = new Stack<>();
-
         stk.push(n);
         while(!stk.isEmpty()) {
             n = stk.pop();
-
             if(!visited[n]) {
                 visited[n] = true;
                 System.out.print(n + " ");
             }
+            ReverseIterator<Integer> it = new ReverseIterator<>(adjacencyList.get(n));
+            while(it.hasNext()){
+                int i = it.next();
+                if(!visited[i]){
+                    stk.push(i);
+                }
+            }
 
-            /*
+            /*     Alternate Iterative Solution ...
             If you don't reverse adjacency list of corresponding node.
             Then also it will do DFS but from last node. Output will be different
             from what we get from recursive solution.
-             */
+
             Collections.reverse(adjacencyList.get(n));
             for (int i : adjacencyList.get(n)) {
                 if (!visited[i]) {
                     stk.push(i);
                 }
             }
+            */
         }
-
-        System.out.println();
     }
 
     void DFS(int v, boolean[] visited)
     {
         visited[v] = true;
         System.out.print(v + " ");
-
         for (int n : adjacencyList.get(v)) {
             if (!visited[n])
                 DFS(n, visited);
@@ -111,9 +110,39 @@ public class Graph {
 
     void recursiveDFS(int v)
     {
-        boolean[] visited = new boolean[adjacencyList.size()];
+        boolean[] visited = new boolean[size()];
         DFS(v, visited);
     }
+
+    int size(){
+        return adjacencyList.size();
+    }
+
+    int motherVertex(int n){
+        Stack<Integer> stk = new Stack<>();
+        boolean[] visited = new boolean[size()];
+        
+        stk.push(n);
+        int count = 0;
+        while(!stk.isEmpty()){
+            int k = stk.pop();
+            if(!visited[k]){
+                visited[k] = true;
+                ++count;
+            }
+
+            ReverseIterator<Integer> it = new ReverseIterator<>(adjacencyList.get(k));
+            while(it.hasNext()){
+                int i = it.next();
+                if(!visited[i]){
+                    stk.push(i);
+                }
+            }
+        }
+        
+        return count==size()?n:-1;
+    }
+    
     /*
     The outer loop is executed O(|V|) regardless of the graph structure.
         - Even if we had no edges at all, for every iteration of the outer loop, we would have
@@ -125,11 +154,11 @@ public class Graph {
         in that iteration
 
     Summing it all up, we get a runtime of O(|V| * 1 + deg(v1) + deg(v2) + ...) = O(|V| + |E|).
+    Time complexity : O(V+E)
     */
     void printGraph(){
-        System.out.println("Printing adjacency list. Time complexity : O(V+E)");
-        for(int u = 0; u<adjacencyList.size(); ++u){
-            System.out.print("Edge between "+ u);
+        for(int u = 0; u<size(); ++u){
+            System.out.print("Adjacency List for "+ u);
             for(int v : adjacencyList.get(u)){
                 System.out.print(" -> " + v);
             }
@@ -138,24 +167,37 @@ public class Graph {
     }
 
     public static void main(String[] args) {
-        Graph input = new Graph(5);
+        Graph input = new Graph(6);
 
         input.addEdge(0,1);
         input.addEdge(0,2);
+        input.addEdge(0,3);
         input.addEdge(1,2);
         input.addEdge(1,3);
         input.addEdge(1,4);
-        input.addEdge(2,3);
-        input.addEdge(3,4);
-        /*
-        input.addEdge(0,1);
-        input.addEdge(0,2);
-        input.addEdge(0,3);
-        input.addEdge(0,4);
-*/
+        input.addEdge(2,5);
+        input.addEdge(0,5);
+
         input.printGraph();
+
+        System.out.print("\n BFS : ");
         input.doBFS(0);
+
+        System.out.print("\n DFS : ");
         input.doDFS(0);
+
+        System.out.print("\n DFS Recursive : ");
         input.recursiveDFS(0);
+
+        // Find Mother Vertex. Time complexity : O(V(V+E))
+        for(int i = 0; i< input.size(); ++i){
+            if(input.motherVertex(i)==i) {
+                System.out.println("\n\n Mother vertex : " + i);
+                break;
+            }
+        }
+
+        // Kosaraju's Strongly Connected Component Algorithm. Time complexity : O(V+E)
+        // System.out.println(input.kosaraju());
     }
 }
