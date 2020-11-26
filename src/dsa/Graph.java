@@ -36,7 +36,7 @@ public class Graph {
         adjacencyMatrix = matrix;
     }
 
-    void addEdge(int u, int v){
+    public void addEdge(int u, int v){
         adjacencyList.get(u).add(v);
         adjacencyList.get(v).add(u);
     }
@@ -47,7 +47,7 @@ public class Graph {
     }
 
     // Perform Breadth First Search. Time complexity : O(V+E)
-    void doBFS(int n){
+    public void doBFS(int n){
         boolean[] visited = new boolean[size()];
         Queue<Integer> next = new LinkedList<>();
 
@@ -67,7 +67,7 @@ public class Graph {
     }
 
     // Perform Depth First Search. Time complexity : O(V+E)
-    void doDFS(int n){
+    public void doDFS(int n){
         boolean[] visited = new boolean[size()];
         Stack<Integer> stk = new Stack<>();
         stk.push(n);
@@ -100,7 +100,7 @@ public class Graph {
         }
     }
 
-    void DFS(int v, boolean[] visited)
+    public void DFS(int v, boolean[] visited)
     {
         visited[v] = true;
         System.out.print(v + " ");
@@ -110,13 +110,13 @@ public class Graph {
         }
     }
 
-    void recursiveDFS(int v)
+    public void recursiveDFS(int v)
     {
         boolean[] visited = new boolean[size()];
         DFS(v, visited);
     }
 
-    int size(){
+    public int size(){
         return adjacencyList.size();
     }
 
@@ -145,7 +145,7 @@ public class Graph {
         return count==size()?n:-1;
     }
 
-    int kosaraju(){
+    public int kosaraju(){
         boolean[] visited = new boolean[size()];
         int lastFinished = -1;
         for(int i=0; i<size(); ++i){
@@ -178,7 +178,7 @@ public class Graph {
     Summing it all up, we get a runtime of O(|V| * 1 + deg(v1) + deg(v2) + ...) = O(|V| + |E|).
     Time complexity : O(V+E)
     */
-    void printGraph(){
+    public void printGraph(){
         for(int u = 0; u<size(); ++u){
             System.out.print("Adjacency List for "+ u);
             for(int v : adjacencyList.get(u)){
