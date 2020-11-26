@@ -12,6 +12,8 @@
 
 package dsa;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.*;
 
 public class Graph {
@@ -144,7 +146,23 @@ public class Graph {
     }
 
     int kosaraju(){
-        return 1;
+        boolean[] visited = new boolean[size()];
+        int lastFinished = -1;
+        for(int i=0; i<size(); ++i){
+            if(!visited[i]) {
+                DFS(i, visited);
+                lastFinished = i;
+            }
+        }
+
+        Arrays.fill(visited, false);
+        DFS(lastFinished, visited);
+        for(boolean check : visited){
+            if(!check)
+                return -1;
+        }
+
+        return lastFinished;
     }
 
     /*
@@ -171,7 +189,7 @@ public class Graph {
     }
 
     public static void main(String[] args) {
-        Graph input = new Graph(6);
+        Graph input = new Graph(8);
 
         input.addEdge(0,1);
         input.addEdge(0,2);
@@ -181,6 +199,7 @@ public class Graph {
         input.addEdge(1,4);
         input.addEdge(2,5);
         input.addEdge(0,5);
+        input.addEdge(6,7);
 
         input.printGraph();
 
@@ -201,7 +220,20 @@ public class Graph {
             }
         }
 
+        // Suppress System.out.print in next function. Very interesting to learn
+        PrintStream originalStream = System.out;
+        PrintStream dummyStream = new PrintStream(new OutputStream(){
+            public void write(int b) {
+                // NO-OP
+            }
+        });
+        System.setOut(dummyStream);
+
         // Kosaraju's Strongly Connected Component Algorithm. Time complexity : O(V+E)
-        System.out.println(input.kosaraju());
+        int output = input.kosaraju();
+
+        // Enable System.out.print in next function.
+        System.setOut(originalStream);
+        System.out.println(" Mother Vertex via Kosaraju : " + output);
     }
 }
