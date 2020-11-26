@@ -20,7 +20,7 @@ public class Graph {
     byte[][] adjacencyMatrix;
     ArrayList<ArrayList<Integer>> adjacencyList;
 
-    Graph(int v){
+    public Graph(int v){
         adjacencyList = new ArrayList<>();
         for(int i = 1; i<=v; ++i){
             adjacencyList.add(new ArrayList<>());
