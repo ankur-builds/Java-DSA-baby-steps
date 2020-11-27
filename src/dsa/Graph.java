@@ -17,8 +17,8 @@ import java.io.PrintStream;
 import java.util.*;
 
 public class Graph {
-    byte[][] adjacencyMatrix;
-    ArrayList<ArrayList<Integer>> adjacencyList;
+    public byte[][] adjacencyMatrix;
+    public ArrayList<ArrayList<Integer>> adjacencyList;
 
     public Graph(int v){
         adjacencyList = new ArrayList<>();
@@ -28,7 +28,7 @@ public class Graph {
         adjacencyMatrix = new byte[v][v];
     }
 
-    Graph(int v, byte[][] matrix){
+    public Graph(int v, byte[][] matrix){
         adjacencyList = new ArrayList<>();
         for(int i = 1; i<=v; ++i){
             adjacencyList.add(new ArrayList<>());
@@ -39,11 +39,6 @@ public class Graph {
     public void addEdge(int u, int v){
         adjacencyList.get(u).add(v);
         adjacencyList.get(v).add(u);
-    }
-
-    void addNode(){
-        // This will be size() + 1 th node
-        adjacencyList.add(new ArrayList<>());
     }
 
     // Perform Breadth First Search. Time complexity : O(V+E)
