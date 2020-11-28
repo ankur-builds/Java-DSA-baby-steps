@@ -54,6 +54,12 @@ public class DetectCycle {
         return false;
     }
 
+    /*
+    Its the same as undirected graph. Only change here is that here we need to track
+    the vertices from which there is an outbound edge. So tomorrow when we land on
+    same vertex, we can confidently say that there is a cycle for that "strongly connected component"
+     */
+
     public static void main(String[] args) {
         DetectCycle input = new DetectCycle(new Graph(6));
         input.G.addEdge(0,1);
