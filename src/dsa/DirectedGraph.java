@@ -132,7 +132,7 @@ public class DirectedGraph {
 
         input.printGraph();
         System.out.println(input.isCyclic()?"Cyclic":"Non-Cyclic");
-        input.addEdge(2,0); // Lets turn non-cyclic
+        input.addEdge(2,0); // Lets turn non-cyclic to cyclic
         System.out.println(input.isCyclic()?"Cyclic":"Non-Cyclic");
     }
 }
