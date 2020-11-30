@@ -36,6 +36,7 @@ public class DirectedGraph {
 
     public void addEdge(int u, int v){
         adjacencyList.get(u).add(v);
+        adjacencyMatrix[u][v] = 1;
     }
 
     // Perform Breadth First Search. Time complexity : O(V+E)
