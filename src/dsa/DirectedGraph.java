@@ -15,7 +15,7 @@ package dsa;
 import java.util.*;
 
 public class DirectedGraph {
-    public byte[][] adjacencyMatrix;
+    public int[][] adjacencyMatrix;
     public ArrayList<ArrayList<Integer>> adjacencyList;
 
     public DirectedGraph(int v){
@@ -23,10 +23,10 @@ public class DirectedGraph {
         for(int i = 1; i<=v; ++i){
             adjacencyList.add(new ArrayList<>());
         }
-        adjacencyMatrix = new byte[v][v];
+        adjacencyMatrix = new int[v][v];
     }
 
-    public DirectedGraph(int v, byte[][] matrix){
+    public DirectedGraph(int v, int[][] matrix){
         adjacencyList = new ArrayList<>();
         for(int i = 1; i<=v; ++i){
             adjacencyList.add(new ArrayList<>());
