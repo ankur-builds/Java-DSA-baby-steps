@@ -50,10 +50,6 @@ public class BinaryHeap<T extends Comparable> {
         return (index - 1) / 2;
     }
 
-    public int getCount() {
-        return count;
-    }
-
     public boolean isEmpty() {
         return count == 0;
     }
@@ -66,10 +62,23 @@ public class BinaryHeap<T extends Comparable> {
         return arr[index];
     }
 
+    public void setElementAtIndex(int index, T value) {
+        if(index<arr.length)
+            arr[index] = value;
+    }
+
+    public void addElement(T value){
+        arr[count] = value;
+    }
+
     protected void swap(int index1, int index2) {
         T temp = arr[index1];
         arr[index1] = arr[index2];
         arr[index2] = temp;
+    }
+
+    public T getHighestPriority(){
+        return arr[0];
     }
 
     public static void main(String[] args) {
@@ -105,7 +114,7 @@ class MinHeap<T extends Comparable> extends BinaryHeap<T> {
         if (getElementAtIndex(index).compareTo(getElementAtIndex(smallerIndex)) > 0) {
             swap(index, smallerIndex);
             siftDown(smallerIndex);
-        } else return;
+        }
     }
 
     protected void siftUp(int index) {
@@ -115,6 +124,27 @@ class MinHeap<T extends Comparable> extends BinaryHeap<T> {
                 getElementAtIndex(index).compareTo(getElementAtIndex(parentIndex)) < 0) {
             swap(index, parentIndex);
             siftUp(parentIndex);
-        } else return;
+        }
+    }
+
+    public void insert(T value){
+        if(isFull()){
+            System.out.println("Heap is Full. Throw Exception !!!");
+            return;
+        }
+
+        addElement(value);
+        siftUp(count);
+        count++;
+    }
+
+    public T removeHighestPriority(){
+        T min = getHighestPriority();
+
+        setElementAtIndex(0, getElementAtIndex(count-1));
+        count--;
+        siftDown(0);
+
+        return min;
     }
 }
