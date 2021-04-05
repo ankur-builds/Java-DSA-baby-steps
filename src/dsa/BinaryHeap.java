@@ -29,7 +29,7 @@ public class BinaryHeap<T extends Comparable> {
 
     public int getLeftChildIndex(int index) {
         int leftChildIndex = 2 * index + 1;
-        if (leftChildIndex >= count)
+        if (leftChildIndex > arr.length)
             return -1;
 
         return leftChildIndex;
@@ -37,7 +37,7 @@ public class BinaryHeap<T extends Comparable> {
 
     public int getRightChildIndex(int index) {
         int rightChildIndex = 2 * index + 2;
-        if (rightChildIndex >= count)
+        if (rightChildIndex > arr.length)
             return -1;
 
         return rightChildIndex;
