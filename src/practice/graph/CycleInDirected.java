@@ -73,8 +73,8 @@ public class CycleInDirected extends Graph {
         input.addEdge(3,4);
         input.addEdge(4,2);
 
-        System.out.println(input.isCyclic()?"Cyclic":"Non-Cyclic");
-        input.addEdge(2,0); // Lets turn non-cyclic to cyclic
-        System.out.println(input.isCyclic()?"Cyclic":"Non-Cyclic");
+        System.out.println(input.isCyclic()?"Cyclic":"ACyclic");
+        input.addEdge(2,0); // Lets turn acyclic to cyclic
+        System.out.println(input.isCyclic()?"Cyclic":"ACyclic");
     }
 }
