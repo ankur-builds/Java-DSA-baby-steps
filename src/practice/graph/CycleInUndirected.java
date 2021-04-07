@@ -15,8 +15,8 @@ package practice.graph;
 import dsa.Graph;
 
 // Detect Graph in an undirected Graph
-public class DetectCycle extends Graph{
-    DetectCycle(int v){
+public class CycleInUndirected extends Graph{
+    CycleInUndirected(int v){
         super(v);
     }
 
@@ -54,7 +54,7 @@ public class DetectCycle extends Graph{
     }
 
     public static void main(String[] args) {
-        DetectCycle input = new DetectCycle(6);
+        CycleInUndirected input = new CycleInUndirected(6);
         input.addEdge(0,1);
         input.addEdge(0,2);
         input.addEdge(0,3);
