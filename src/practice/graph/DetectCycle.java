@@ -14,13 +14,10 @@ package practice.graph;
 
 import dsa.Graph;
 
-import java.util.ArrayList;
-
-public class DetectCycle {
-    Graph G;
-
-    DetectCycle(Graph in){
-        G = in;
+// Detect Graph in an undirected Graph
+public class DetectCycle extends Graph{
+    DetectCycle(int v){
+        super(v);
     }
 
     /*
@@ -34,8 +31,8 @@ public class DetectCycle {
     next visited element, if they are not same then there is a back edge ***
      */
     boolean isGraphCyclic(){
-        boolean[] visited = new boolean[G.size()];
-        for(int i = 0; i<G.size(); ++i){
+        boolean[] visited = new boolean[size()];
+        for(int i = 0; i<size(); ++i){
             if(!visited[i])
                 if(DFSUtil(i, -1, visited))
                     return true;
@@ -46,7 +43,7 @@ public class DetectCycle {
 
     boolean DFSUtil(int i, int parent, boolean[] visited){
         visited[i] = true;
-        for(int k : G.adjacencyList.get(i)){
+        for(int k : adjacencyList.get(i)){
             if(!visited[k])
                 DFSUtil(k,i,visited);
             else if(k!=parent)
@@ -56,58 +53,16 @@ public class DetectCycle {
         return false;
     }
 
-    void kCores(int k, ArrayList<Integer> affected, int[] degree){
-        boolean[] visited = new boolean[G.size()];
-
-        // Iterate over the list of affected vertices
-        for(int indx = 0; indx<affected.size(); ++indx){
-            int curr = affected.get(indx);
-            if(!visited[curr] && degree[curr]<k) {
-                visited[curr] = true;
-                for(int neighbour : G.adjacencyList.get(curr)){
-                    --degree[neighbour];
-                    if(degree[neighbour]<k)
-                        affected.add(neighbour);
-                }
-            }
-        }
-
-        System.out.println("\nPrint K Cores :: ");
-        for(int i = 0; i<G.size(); ++i){
-            if(!visited[i]){
-                System.out.print(i + " => ");
-                for(int j : G.adjacencyList.get(i)){
-                    if(!visited[j])
-                        System.out.print(j + " ");
-                }
-
-                System.out.println();
-            }
-        }
-    }
-
     public static void main(String[] args) {
-        DetectCycle input = new DetectCycle(new Graph(6));
-        input.G.addEdge(0,1);
-        input.G.addEdge(0,2);
-        input.G.addEdge(0,3);
-        input.G.addEdge(1,4);
-        input.G.addEdge(2,5);
+        DetectCycle input = new DetectCycle(6);
+        input.addEdge(0,1);
+        input.addEdge(0,2);
+        input.addEdge(0,3);
+        input.addEdge(1,4);
+        input.addEdge(2,5);
 
         System.out.println(input.isGraphCyclic()?"Cyclic" : "Not cyclic");
-        input.G.addEdge(0,5);
+        input.addEdge(0,5);
         System.out.println(input.isGraphCyclic()?"Cyclic" : "Not cyclic");
-
-        System.out.println("\nPrint Graph ::");
-        input.G.printGraph();
-
-        ArrayList<Integer> affected = new ArrayList<>();
-        int[] degree = new int[input.G.size()];
-        for(int i = 0; i<6; ++i){
-            affected.add(i);
-            degree[i] = input.G.adjacencyList.get(i).size();
-        }
-
-        input.kCores(2,affected, degree);
     }
 }
