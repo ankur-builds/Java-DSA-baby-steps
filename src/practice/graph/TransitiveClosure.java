@@ -12,8 +12,6 @@
 
 package practice.graph;
 
-import dsa.DirectedGraph;
-
 /*
 Given a directed graph, find out if a vertex j is reachable from another vertex i
 for all vertex pairs (i, j) in the given graph. Here reachable mean that there is
@@ -21,16 +19,16 @@ a path from vertex i to j. The reach-ability matrix is called the transitive
 closure of a graph.
  */
 public class TransitiveClosure {
-    DirectedGraph G;
+    CycleInDirected G;
     int[][] transitiveMatrix;
 
     TransitiveClosure(int v){
-        G = new DirectedGraph(v);
+        G = new CycleInDirected(v);
         transitiveMatrix = new int[v][v];
     }
 
     /*
-    Floyd Marshall Algorithm is for solving All Pairs Shortest Path problem
+    Floyd Warshall Algorithm is for solving All Pairs Shortest Path problem
     For every pair (i, j) of the source and destination vertices respectively, there are
     two possible cases.
     1) k is not an intermediate vertex in shortest path from i to j. We keep the value of
@@ -39,7 +37,7 @@ public class TransitiveClosure {
     dist[i][j] as dist[i][k] + dist[k][j] if dist[i][j] > dist[i][k] + dist[k][j]
     Time complexity : O(V^3)
      */
-    void floydMarshallAlgorithm(){
+    void floydWarshallAlgorithm(){
         int V = G.size();
         int[][] distance = new int[V][V];
         for(int i = 0; i<V; ++i){
@@ -114,7 +112,7 @@ public class TransitiveClosure {
 
         input.printMatrix(input.G.adjacencyMatrix);
         System.out.println();
-        input.floydMarshallAlgorithm();
+        input.floydWarshallAlgorithm();
         System.out.println();
         input.dfs();
     }
