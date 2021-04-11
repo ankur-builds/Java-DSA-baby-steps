@@ -84,6 +84,80 @@ public class MinSpanningTree extends Graph {
         System.out.println(edgeMap);
     }
 
+    public void theKruskalAlgorithm(){
+        // Step 1 : Setup a priority queue which returns edge with smallest weight
+        Queue<EdgeInfo> q = new PriorityQueue<>(new Comparator<EdgeInfo>() {
+            @Override
+            public int compare(EdgeInfo e1, EdgeInfo e2) {
+                return e1.getWeight().compareTo(e2.getWeight());
+            }
+        });
+
+        // Add all edges to Priority Queue
+        Set<String> edge = new HashSet<>();
+        for(int i = 0; i<size(); ++i){
+            for(int neighbour : adjacencyList.get(i)){
+                if(!(edge.contains(i+"," +neighbour) || edge.contains(neighbour+","+i))){
+                    q.add(new EdgeInfo(i, neighbour, getWeight(i, neighbour)));
+                    edge.add(i+","+neighbour);
+                }
+            }
+        }
+
+        CycleInUndirected G = new CycleInUndirected(size());
+        int count = 0;
+
+        // Step 2 : Populate edgeMap
+        while(!q.isEmpty()){
+            EdgeInfo current = q.poll();
+            Integer source = current.getSource();
+            Integer destination = current.getDestination();
+
+            if(count<size()-1) {
+                G.addEdge(source, destination);
+
+                if(G.isGraphCyclic()) {
+                    G.removeEdge(source, destination);
+                } else{
+                    count++;
+                }
+
+            } else
+                break;
+        }
+
+        G.printGraph();
+    }
+
+    private class EdgeInfo{
+        private Integer vertex1;
+        private Integer vertex2;
+        private Integer weight;
+
+        public EdgeInfo(Integer vertex1, Integer vertex2, Integer weight) {
+            this.vertex1 = vertex1;
+            this.vertex2 = vertex2;
+            this.weight = weight;
+        }
+
+        public Integer getSource(){
+            return vertex1;
+        }
+
+        public Integer getDestination(){
+            return vertex2;
+        }
+
+        public Integer getWeight() {
+            return weight;
+        }
+
+        @Override
+        public String toString(){
+            return vertex1 + " -> " + vertex2;
+        }
+    }
+
     public static void main(String[] args) {
         MinSpanningTree input = new MinSpanningTree(6);
         input.addWeight(0,4,5);
@@ -98,5 +172,7 @@ public class MinSpanningTree extends Graph {
         input.addWeight(5,3,4);
 
         input.thePrimAlgorithm();
+
+        input.theKruskalAlgorithm();
     }
 }
