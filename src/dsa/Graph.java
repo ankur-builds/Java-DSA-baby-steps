@@ -41,6 +41,11 @@ public class Graph {
         adjacencyList.get(v).add(u);
     }
 
+    public void removeEdge(Integer u, Integer v){
+        adjacencyList.get(u).remove(v);
+        adjacencyList.get(v).remove(u);
+    }
+
     // Perform Breadth First Search. Time complexity : O(V+E)
     public void doBFS(int n){
         boolean[] visited = new boolean[size()];
@@ -174,13 +179,15 @@ public class Graph {
     Time complexity : O(V+E)
     */
     public void printGraph(){
+        Set<String> edgeList = new HashSet<>();
         for(int u = 0; u<size(); ++u){
-            System.out.print("Adjacency List for "+ u);
             for(int v : adjacencyList.get(u)){
-                System.out.print(" -> " + v);
+                if(!(edgeList.contains(u+"->"+v) || edgeList.contains(v+"->"+u)))
+                    edgeList.add(u+"->"+v);
             }
-            System.out.println();
         }
+
+        System.out.println(edgeList);
     }
 
     public static void main(String[] args) {
