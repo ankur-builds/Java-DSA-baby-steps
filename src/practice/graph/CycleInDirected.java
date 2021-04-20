@@ -50,8 +50,11 @@ public class CycleInDirected extends Graph {
     Hence cycle detected.
      */
     boolean cyclicUtil(int v, boolean[] visited, Set<Integer> pathNodes){
-        if(visited[v] && pathNodes.contains(v))
+        if(pathNodes.contains(v))
             return true;
+
+        if(visited[v])
+            return false;
 
         pathNodes.add(v);
         visited[v] = true;
@@ -66,7 +69,6 @@ public class CycleInDirected extends Graph {
 
     public static void main(String[] args) {
         CycleInDirected input = new CycleInDirected(5);
-
         // 0 ---> 3 ---> 4 ----> 2
         //   ---> 1 -----------> 2
         input.addEdge(0,1);
