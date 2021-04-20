@@ -14,6 +14,9 @@ package practice.graph;
 
 import dsa.Graph;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class CycleInDirected extends Graph {
     public CycleInDirected(int v){
         super(v);
@@ -31,8 +34,8 @@ public class CycleInDirected extends Graph {
         // Iterate over each connected components.
         for(int i = 0; i<size(); ++i){
             if(!visited[i]){
-                boolean[] outbound = new boolean[size()];
-                if(cyclicUtil(i, visited, outbound))
+                Set<Integer> pathNodes = new HashSet<>();
+                if(cyclicUtil(i, visited, pathNodes))
                     return true;
             }
         }
@@ -40,25 +43,24 @@ public class CycleInDirected extends Graph {
     }
 
     /*
-    In a directed graph we just need to check if there is an outbound link to other node in that "connected
-    component" << This is the reason why we are reinitializing outbound array in each iteration in line 33
-    as each iteration indicates a new connected component
+    Whether its a directed graph or undirected graph, to check for cycles we need to check if there
+    is a back edge. In undirected graph, we confirm by checking if next node to visit is not parent node.
+    In directed graph we confirm by adding nodes that we have visited in a Set or List and check if next
+    node to visit is an element of Set or List. If it is present then we have reached starting point of a loop.
+    Hence cycle detected.
      */
-    boolean cyclicUtil(int v, boolean[] visited, boolean[] outbound){
-        if(outbound[v]) // visited[v] is obv true so no need to double check
+    boolean cyclicUtil(int v, boolean[] visited, Set<Integer> pathNodes){
+        if(visited[v] && pathNodes.contains(v))
             return true;
 
-        if(visited[v]) // Intelligent check!!! to ensure every adjacency list is iterated only once.
-            return false;
-
+        pathNodes.add(v);
         visited[v] = true;
         for (int n : adjacencyList.get(v)) {
-            if(!outbound[v])
-                outbound[v] = true;
-            if(cyclicUtil(n, visited, outbound))
+            if(cyclicUtil(n, visited, pathNodes))
                 return true;
         }
 
+        pathNodes.remove(v);
         return false;
     }
 
@@ -76,5 +78,18 @@ public class CycleInDirected extends Graph {
         System.out.println(input.isCyclic()?"Cyclic":"ACyclic");
         input.addEdge(2,0); // Lets turn acyclic to cyclic
         System.out.println(input.isCyclic()?"Cyclic":"ACyclic");
+
+        CycleInDirected input2 = new CycleInDirected(6);
+        // 0 ----> 1----->2----->3----->5
+        //          ----->4------|
+
+        input2.addEdge(0,1);
+        input2.addEdge(1,2);
+        input2.addEdge(2,3);
+        input2.addEdge(1,4);
+        input2.addEdge(4,3);
+        input2.addEdge(3,5);
+
+        System.out.println(input2.isCyclic()?"Cyclic":"ACyclic");
     }
 }
