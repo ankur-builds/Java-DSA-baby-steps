@@ -14,7 +14,7 @@ package practice.stack;
 
 import java.util.Stack;
 
-public class MaxAreaOfHistogram {
+public class MaxAreaInHistogram {
 
     // Count the blocks larger than current bar to the left
     private int[] numBlocks_l(int[] input){
@@ -87,7 +87,7 @@ public class MaxAreaOfHistogram {
         System.out.println("Maximum area of histogram : " + max);
     }
     public static void main(String[] args) {
-        MaxAreaOfHistogram input = new MaxAreaOfHistogram();
+        MaxAreaInHistogram input = new MaxAreaInHistogram();
         int[] arr = {6, 2, 5, 4, 5, 1, 6};
         input.calculateMaxArea(arr);
     }
