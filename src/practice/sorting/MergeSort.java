@@ -22,13 +22,12 @@ public class MergeSort {
     }
 
     static void splitArray(int[] input, int start, int end){
-        if(start==end)
-            return;
-
-        int mid = (start+end)/2;
-        splitArray(input, start, mid);
-        splitArray(input, mid+1, end);
-        mergeArray(input, start, mid, end);
+        if(start<end) {
+            int mid = (start + end) / 2;
+            splitArray(input, start, mid);
+            splitArray(input, mid + 1, end);
+            mergeArray(input, start, mid, end);
+        }
     }
 
     static void mergeArray(int[] input, int start, int mid, int end){
@@ -37,7 +36,7 @@ public class MergeSort {
         int j = mid+1;
         int k = 0;
         while(i<=mid && j<=end){
-            if(input[i]<input[j])
+            if(input[i]<=input[j])
                 output[k++] = input[i++];
             else
                 output[k++] = input[j++];
