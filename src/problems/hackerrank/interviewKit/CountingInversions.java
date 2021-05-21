@@ -10,7 +10,7 @@
  * Please refer to apache license terms in the project.
  */
 
-package problems.hackerrank.interviewKit.sorting;
+package problems.hackerrank.interviewKit;
 
 import java.util.ArrayList;
 import java.util.List;
