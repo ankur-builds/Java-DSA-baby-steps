@@ -12,7 +12,6 @@
 
 package problems.hackerrank.interviewKit;
 
-import java.io.*;
 import java.util.*;
 
 // Hackerrank : Sherlock and Valid String
