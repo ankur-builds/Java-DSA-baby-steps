@@ -46,9 +46,23 @@ public class SubsetSum {
         return table[arr.length][total];
     }
 
+    static boolean equalSumPartition(int[] arr){
+        int sum = 0;
+        for (int j : arr) {
+            sum += j;
+        }
+
+        if (sum%2 !=0)
+            return false;
+
+        return tabulation(arr, sum/2);
+    }
+
     public static void main(String[] args) {
         int[] set = {3, 34, 4, 12, 5, 2};
         System.out.println(recursion(set,0,60));
         System.out.println(tabulation(set,60));
+
+        System.out.println("Equal Sum Partition possible : " + equalSumPartition(set));
     }
 }
