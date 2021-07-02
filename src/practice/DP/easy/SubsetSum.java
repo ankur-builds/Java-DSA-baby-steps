@@ -12,8 +12,6 @@
 
 package practice.DP.easy;
 
-import java.util.Arrays;
-
 public class SubsetSum {
     static boolean recursion(int[] arr, int indx, int total){
         if(indx==arr.length)
