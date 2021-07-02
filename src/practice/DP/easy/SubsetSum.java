@@ -80,6 +80,41 @@ public class SubsetSum {
         return table[arr.length][sum];
     }
 
+    // Variation 3 : Divide an array in two partitions such that their subset sum difference is minimum
+    static int subsetSumDifference(int[] arr){
+        int sum = 0;
+        for(int i : arr)
+            sum += i;
+
+        boolean[][] table = new boolean[arr.length+1][sum/2+1];
+
+        for(int i = 0; i<=arr.length; ++i){
+            for(int j = 0; j<=sum/2; ++j){
+                table[0][j] = false;
+                table[i][0] = true;
+            }
+        }
+
+        int max = 0;
+        // Find max sum for which a subset is possible in range (0 - sum/2)
+        for(int i = 1; i<=arr.length; ++i){
+            for(int j = 1; j<=sum/2; ++j){
+                if(j<arr[i-1])
+                    table[i][j] = table[i-1][j];
+                else
+                    table[i][j] = table[i-1][j] || table[i-1][j-arr[i-1]];
+
+                if(table[i][j] && j>max)
+                    max = j;
+            }
+
+            if(max==sum/2)
+                break;
+        }
+
+        return sum-2*max;
+    }
+
     public static void main(String[] args) {
         int[] set = {3, 34, 4, 12, 5, 2};
         System.out.println(recursion(set,0,60));
@@ -89,5 +124,7 @@ public class SubsetSum {
 
         int[] arr = {2,3,5,6,8,10};
         System.out.println(countSubsets(arr, 10));
+
+        System.out.println(subsetSumDifference(arr));
     }
 }
