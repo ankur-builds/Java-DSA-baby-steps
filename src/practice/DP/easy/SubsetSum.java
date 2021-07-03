@@ -115,6 +115,15 @@ public class SubsetSum {
         return sum-2*max;
     }
 
+    // Variation 4 : Count number of subset sum with a given difference
+    static int countSubsetsDiff(int[] arr, int diff){
+        int sum = 0;
+        for(int i : arr)
+            sum+=i;
+
+        return countSubsets(arr, (sum-diff)/2);
+    }
+
     public static void main(String[] args) {
         int[] set = {3, 34, 4, 12, 5, 2};
         System.out.println(recursion(set,0,60));
@@ -126,5 +135,6 @@ public class SubsetSum {
         System.out.println(countSubsets(arr, 10));
 
         System.out.println(subsetSumDifference(arr));
+        System.out.println(countSubsetsDiff(arr, 0));
     }
 }
