@@ -12,6 +12,9 @@
 
 package practice.DP;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 // Knapsack is basically a choice problem where we decide whether we want to choose an item or not.
 public class KnapsackProblem {
     static int recursiveSolution(int[] val, int[] wt, int n, int W){
@@ -56,7 +59,23 @@ public class KnapsackProblem {
                 if(wt[item-1]>capacity)
                     table[item][capacity] = table[item-1][capacity];
                 else
-                    table[item][capacity] = Math.max(val[item-1]+table[item-1][capacity-wt[item-1]], table[item-1][capacity]);
+                    table[item][capacity] = Math.max(val[item-1]+table[item-1][capacity-wt[item-1]],
+                            table[item-1][capacity]);
+            }
+        }
+
+        return table[val.length][W];
+    }
+
+    static int unboundedKnapsackProblem(int[] wt, int[] val, int W){
+        int[][] table = new int[val.length+1][W+1];
+
+        for(int i = 1; i<=val.length; ++i){
+            for(int j = 1; j<=W; ++j){
+                if(wt[i-1]>j)
+                    table[i][j] = table[i-1][j];
+                else
+                    table[i][j] = Math.max(table[i-1][j], val[i-1]+table[i][j-wt[i-1]]);
             }
         }
 
@@ -77,5 +96,6 @@ public class KnapsackProblem {
         }
         System.out.println("Memo-ization -> " + memoSolution(value, weight, value.length, capacity, memoTable));
         System.out.println("Tabulation -> " + tabulationSolution(value, weight, capacity));
+        System.out.println("Unbounded Knapsack -> " + unboundedKnapsackProblem(weight, value, capacity));
     }
 }
