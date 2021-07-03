@@ -12,9 +12,6 @@
 
 package practice.DP;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 // Knapsack is basically a choice problem where we decide whether we want to choose an item or not.
 public class KnapsackProblem {
     static int recursiveSolution(int[] val, int[] wt, int n, int W){
