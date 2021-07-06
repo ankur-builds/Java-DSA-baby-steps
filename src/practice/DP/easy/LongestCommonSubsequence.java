@@ -78,6 +78,28 @@ public class LongestCommonSubsequence {
         return table[A.length][B.length];
     }
 
+    // Print longest common subsequence
+    static String printLCS(char[] A, char[] B){
+        String[][] table = new String[A.length+1][B.length+1];
+
+        for(int i = 0; i<=A.length; ++i){
+            for(int j = 0; j<=B.length; ++j) {
+                table[i][j] = "";
+            }
+        }
+
+        for(int i = 1; i<=A.length; ++i){
+            for(int j = 1; j<=B.length; ++j) {
+                if(A[i-1]==B[j-1])
+                    table[i][j] = table[i-1][j-1]+A[i-1];
+                else
+                    table[i][j] = (table[i-1][j].length()>table[i][j-1].length())?table[i-1][j]:table[i][j-1];
+            }
+        }
+
+        return table[A.length][B.length];
+    }
+
     // In common substring, we look for continuous sequence of characters that are common in both strings.
     static int longestCommonSubstring(String A, String B){
         int[][] table = new int[A.length()+1][B.length()+1];
@@ -110,8 +132,10 @@ public class LongestCommonSubsequence {
         System.out.println(memoization(A.toCharArray(), B.toCharArray()));
         System.out.println(tabulation(A.toCharArray(),B.toCharArray()));
 
-        A = "GeeksforGeeks";
-        B = "GeeksQuiz";
+        A = "Geeksfor_Geeks";
+        B = "GeeksQuiz_eks";
         System.out.println(longestCommonSubstring(A,B));
+
+        System.out.println(printLCS(A.toCharArray(), B.toCharArray()));
     }
 }
