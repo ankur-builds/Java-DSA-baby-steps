@@ -12,45 +12,51 @@
 
 package practice.array.rotations;
 
+import java.util.Arrays;
+
+// Problem Statement : https://www.geeksforgeeks.org/array-rotation/
 public class ArrayRotation {
-    public static int[] rotate(int[] arr, int d, int n){
-        int[] temp = new int[n];
-        for(int i = 0; i<n; ++i){
-            if(i+d+1 > n){
-                temp[i] = arr[d+i-n];
+    // Approach 1 : TC - O(n), SC - O(n)
+    public static int[] rotate(int[] arr, int d){
+        int[] temp = new int[arr.length];
+        for(int i = 0; i<arr.length; ++i){
+            if(i-d<0){
+                temp[arr.length+i-d] = arr[i];
             } else {
-                temp[i] = arr[d+i];
+                temp[i-d] = arr[i];
             }
         }
 
         return temp;
     }
 
-    static void leftRotate(int[] arr, int d, int n)
+    // Approach 2 : Rotate one at a time. TC - O(n*d), SC - O(1)
+    static void leftRotate(int[] arr, int d)
     {
         for (int i = 0; i < d; i++)
-            leftRotateByOne(arr, n);
+            leftRotateByOne(arr);
     }
 
-    static void leftRotateByOne(int[] arr, int n)
+    static void leftRotateByOne(int[] arr)
     {
         int i, temp;
         temp = arr[0];
-        for (i = 0; i < n - 1; i++)
+        for (i = 0; i < arr.length - 1; i++)
             arr[i] = arr[i + 1];
         arr[i] = temp;
     }
 
+    // Approach 3 : Find GCD and rotate by set. TC - O(n), SC - O(1)
     static int gcd(int a, int b){
         if(b==0)
             return a;
         else return gcd(a, a%b);
     }
 
-    static void rotateBySet(int[] arr, int d, int n){
-        d = d % n;
+    static void rotateBySet(int[] arr, int d){
+        d = d % arr.length;
         int j, k, temp;
-        int g_c_d = gcd(d, n);
+        int g_c_d = gcd(d, arr.length);
         for (int i = 0; i < g_c_d; i++) {
             /* move i-th values of blocks */
             temp = arr[i];
@@ -58,8 +64,8 @@ public class ArrayRotation {
             j = i;
             while (true) {
                 k = j + d; // Calculate the index by adding offset
-                if (k >= n)
-                    k = k - n;
+                if (k >= arr.length)
+                    k = k - arr.length;
                 if (k == i)
                     break;
 
@@ -77,25 +83,14 @@ public class ArrayRotation {
 
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 4, 5, 6, 7, 8,9};
+        System.out.println("Input : " + Arrays.toString(arr));
 
-        // Approach 1. O(n), O(n)
-        arr = rotate(arr, 3, arr.length);
-        for(int x : arr){
-            System.out.print(x + " ");
-        }
+        System.out.println("Approach 1 : " + Arrays.toString(rotate(arr, 3)));
 
-        // Approach 2. O(n*d), O(1)
-        leftRotate(arr, 3, arr.length);
-        System.out.println();
-        for(int x : arr){
-            System.out.print(x + " ");
-        }
+        leftRotate(arr, 3);
+        System.out.println("Approach 2 : " + Arrays.toString(arr));
 
-        // Approach 3. O(n), O(1)
-        rotateBySet(arr, 3, arr.length);
-        System.out.println();
-        for(int x : arr){
-            System.out.print(x + " ");
-        }
+        rotateBySet(arr, 3);
+        System.out.println("Approach 3 : " + Arrays.toString(arr));
     }
 }
