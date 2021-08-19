@@ -27,15 +27,28 @@ public class ArrayRearrangement {
                 output[x] = x;
         }
 
-        System.out.println(Arrays.toString(arr));
-        System.out.println(Arrays.toString(output));
+        System.out.println("Input : " + Arrays.toString(arr));
+        System.out.println("Rearranged output : " + Arrays.toString(output));
     }
 
+    // https://www.geeksforgeeks.org/write-a-program-to-reverse-an-array-or-string/
+    public static void reverse(int[] arr){
+        for(int i = 0; i<arr.length/2; ++i){
+            int temp = arr[arr.length-i-1];
+            arr[arr.length-i-1] = arr[i];
+            arr[i] = temp;
+        }
+
+        System.out.println("Reversed array : " + Arrays.toString(arr));
+    }
     public static void main(String[] args) {
         int[] arr = {-1, -2, 6, 1, 9, 3, 2, -1, 4, -1};
         rearrange(arr);
+        reverse(arr);
 
+        System.out.println();
         int[] arr1 = {19, 7, 0, 3, 18, 15, 12, 6, 1, 8, 11, 10, 9, 5, 13, 16, 2, 14, 17, 4};
         rearrange(arr1);
+        reverse(arr1);
     }
 }
