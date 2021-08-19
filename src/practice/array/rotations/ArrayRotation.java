@@ -81,6 +81,24 @@ public class ArrayRotation {
         }
     }
 
+    // https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/
+    public static int search(int[] arr, int key, int start, int end, int d){
+        if(start>=end)
+            return -1;
+
+        int mid = getIndex((start+end)/2, d, arr.length);
+        if(key==arr[mid])
+            return mid;
+        else if(key>arr[mid])
+            return search(arr, key, (start+end)/2+1, end, d);
+        else
+            return search(arr, key, start,(start+end)/2, d);
+    }
+
+    private static int getIndex(int i, int d, int n){
+        return (i-d<0)?(i+n-d):(i-d);
+    }
+
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 4, 5, 6, 7, 8,9};
         System.out.println("Input : " + Arrays.toString(arr));
@@ -92,5 +110,7 @@ public class ArrayRotation {
 
         rotateBySet(arr, 3);
         System.out.println("Approach 3 : " + Arrays.toString(arr));
+
+        System.out.println("Key " + 9 + " at index : " + search(arr, 9, 0, arr.length, 6));
     }
 }
