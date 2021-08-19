@@ -104,6 +104,7 @@ public class ArrayRotation {
     }
 
     // Pivot in a sorted and rotated array is maximum element of array. O(log n)
+    // https://www.geeksforgeeks.org/find-minimum-element-in-a-sorted-and-rotated-array/
     public static int findPivot(int[] arr, int start, int end){
         if(start==end)
             return start;
@@ -113,6 +114,11 @@ public class ArrayRotation {
             return findPivot(arr, mid, end);
         else
             return findPivot(arr, start, mid);
+    }
+
+    // https://www.geeksforgeeks.org/find-rotation-count-rotated-sorted-array/
+    public static int findRotationCount(int[] arr){
+        return findPivot(arr, 0, arr.length) + 1;
     }
 
     public static void main(String[] args) {
@@ -130,5 +136,7 @@ public class ArrayRotation {
         System.out.println("Key " + 9 + " at index : " + search(arr, 9, 0 , arr.length));
 
         System.out.println("Pivot is at index : " + findPivot(arr, 0, arr.length));
+
+        System.out.println("Number of rotations required to return to sorted array : " + findRotationCount(arr));
     }
 }
