@@ -103,6 +103,18 @@ public class ArrayRotation {
             return search(arr, key, start,mid-1);
     }
 
+    // Pivot in a sorted and rotated array is maximum element of array. O(log n)
+    public static int findPivot(int[] arr, int start, int end){
+        if(start==end)
+            return start;
+
+        int mid = (start+end)/2;
+        if(arr[mid]>arr[start])
+            return findPivot(arr, mid, end);
+        else
+            return findPivot(arr, start, mid);
+    }
+
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 4, 5, 6, 7, 8,9};
         System.out.println("Input : " + Arrays.toString(arr));
@@ -116,5 +128,7 @@ public class ArrayRotation {
         System.out.println("Approach 3 : " + Arrays.toString(arr));
 
         System.out.println("Key " + 9 + " at index : " + search(arr, 9, 0 , arr.length));
+
+        System.out.println("Pivot is at index : " + findPivot(arr, 0, arr.length));
     }
 }
