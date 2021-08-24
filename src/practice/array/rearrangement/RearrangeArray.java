@@ -60,11 +60,35 @@ public class RearrangeArray {
         System.out.println(Arrays.toString(arr));
     }
 
+    // Reorder an array according to given indexes
+    // https://www.geeksforgeeks.org/reorder-a-array-according-to-given-indexes/
+    static void reorder(int[] arr, int[] pos){
+        // Time Complexity : O(n). Space Complexity : O(1)
+        for(int i = 0; i<arr.length; ++i){
+            while(pos[i]!=i){
+                int val = arr[pos[i]];
+                int loc = pos[pos[i]];
+
+                arr[pos[i]] = arr[i];
+                pos[pos[i]] = pos[i];
+
+                pos[i] = loc;
+                arr[i] = val;
+            }
+        }
+
+        System.out.println("After reorder : " + Arrays.toString(arr) + " " + Arrays.toString(pos));
+    }
+
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, -4, -1, 4};
         alternatePositiveNegative(arr);
 
         int[] arr1 = {-5, -2, 5, 2, 4, 7, 1, 8, 0, -8};
         alternatePositiveNegative(arr1);
+
+        int[] arr2 = {50, 40, 70, 60, 90, 100};
+        int[] pos = {3,  5,  4,  1,  2, 0};
+        reorder(arr2,pos);
     }
 }
