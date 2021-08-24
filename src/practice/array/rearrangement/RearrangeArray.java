@@ -12,7 +12,7 @@
 
 package practice.array.rearrangement;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class RearrangeArray {
     static boolean rightRotate(int[] arr, int start, int end){
@@ -101,6 +101,19 @@ public class RearrangeArray {
         System.out.println(Arrays.toString(arr));
     }
 
+    // Arrange given numbers to form the biggest number
+    // https://www.geeksforgeeks.org/given-an-array-of-numbers-arrange-the-numbers-to-form-the-biggest-number/
+    static void generateLargest(List<String> arr){
+        arr.sort((x, y) -> {
+            String xy = x + y;
+            String yx = y + x;
+            return (xy).compareTo(yx)>0 ? -1 : 1;
+        });
+
+        for(String str : arr)
+            System.out.print(str);
+    }
+
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, -4, -1, 4};
         alternatePositiveNegative(arr);
@@ -115,5 +128,8 @@ public class RearrangeArray {
         int[] arr2 = {50, 40, 70, 60, 90, 100};
         int[] pos = {3,  5,  4,  1,  2, 0};
         reorder(arr2,pos);
+
+        String[] arr3 = {"54", "546", "548", "60"};
+        generateLargest(Arrays.asList(arr3));
     }
 }
