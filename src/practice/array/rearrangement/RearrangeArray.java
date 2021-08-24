@@ -105,9 +105,9 @@ public class RearrangeArray {
     // https://www.geeksforgeeks.org/given-an-array-of-numbers-arrange-the-numbers-to-form-the-biggest-number/
     static void generateLargest(List<String> arr){
         arr.sort((x, y) -> {
-            String xy = x + y;
-            String yx = y + x;
-            return (xy).compareTo(yx)>0 ? -1 : 1;
+            String xy = x+y;
+            String yx = y+x;
+            return xy.compareTo(yx)>0 ? -1 : 1;
         });
 
         for(String str : arr)
@@ -131,5 +131,9 @@ public class RearrangeArray {
 
         String[] arr3 = {"54", "546", "548", "60"};
         generateLargest(Arrays.asList(arr3));
+
+        System.out.println();
+        String[] arr4 = {"1", "34", "3", "98", "9", "76", "45", "4"};
+        generateLargest(Arrays.asList(arr4));
     }
 }
