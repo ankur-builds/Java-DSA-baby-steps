@@ -80,13 +80,38 @@ public class RearrangeArray {
         System.out.println("After reorder : " + Arrays.toString(arr) + " " + Arrays.toString(pos));
     }
 
+    // Rearrange positive and negative numbers with constant extra space
+    // https://www.geeksforgeeks.org/rearrange-positive-and-negative-numbers/
+    static void rearrange(int[] arr){
+        int negative = 0, positive = arr.length-1;
+        while(negative<positive){
+            while(arr[negative]<0)
+                negative++;
+
+            while(arr[positive]>=0)
+                positive--;
+
+            if(negative<positive) {
+                int temp = arr[negative];
+                arr[negative] = arr[positive];
+                arr[positive] = temp;
+            }
+        }
+
+        System.out.println(Arrays.toString(arr));
+    }
+
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, -4, -1, 4};
         alternatePositiveNegative(arr);
+        rearrange(arr);
+        System.out.println();
 
         int[] arr1 = {-5, -2, 5, 2, 4, 7, 1, 8, 0, -8};
         alternatePositiveNegative(arr1);
+        rearrange(arr1);
 
+        System.out.println();
         int[] arr2 = {50, 40, 70, 60, 90, 100};
         int[] pos = {3,  5,  4,  1,  2, 0};
         reorder(arr2,pos);
