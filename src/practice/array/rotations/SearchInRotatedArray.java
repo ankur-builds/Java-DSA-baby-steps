@@ -23,7 +23,7 @@ public class SearchInRotatedArray {
 
             if(arr[mid]>arr[mid-1] && arr[mid]>arr[mid+1])
                 break;
-            else if(arr[mid] > arr[mid-1])
+            else if(arr[mid]>=arr[mid-1] && arr[mid]>=arr[left])
                 left = mid+1;
             else
                 right = mid-1;
@@ -41,5 +41,8 @@ public class SearchInRotatedArray {
 
         int[] arr2 = {5,6,7,8,9,1,2,3,4};
         System.out.println(findSmallestIndex(arr2));
+
+        int[] arr3 = {9,1,2,3,4,5,6,7,8};
+        System.out.println(findSmallestIndex(arr3));
     }
 }
