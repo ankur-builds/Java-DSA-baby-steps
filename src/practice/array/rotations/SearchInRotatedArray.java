@@ -54,19 +54,15 @@ public class SearchInRotatedArray {
 
     public static void main(String[] args) {
         int[] arr = {3,4,5,6,7,8,9,1,2};
-        System.out.print(findSmallestIndex(arr) + " : ");
-        System.out.println(findLargestIndex(arr));
+        System.out.println("smallest -> " + findSmallestIndex(arr) + " : largest -> " + findLargestIndex(arr));
 
         int[] arr1 = {1,2,3,4,5,6,7,8,9};
-        System.out.print(findSmallestIndex(arr1) + " : ");
-        System.out.println(findLargestIndex(arr1));
+        System.out.println("smallest -> " + findSmallestIndex(arr1) + " : largest -> " + findLargestIndex(arr1));
 
         int[] arr2 = {5,6,7,8,9,1,2,3,4};
-        System.out.print(findSmallestIndex(arr2) + " : ");
-        System.out.println(findLargestIndex(arr2));
+        System.out.println("smallest -> " + findSmallestIndex(arr2) + " : largest -> " + findLargestIndex(arr2));
 
         int[] arr3 = {9,1,2,3,4,5,6,7,8};
-        System.out.print(findSmallestIndex(arr3) + " : ");
-        System.out.println(findLargestIndex(arr3));
+        System.out.println("smallest -> " + findSmallestIndex(arr3) + " : largest -> " + findLargestIndex(arr3));
     }
 }
