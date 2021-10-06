@@ -112,6 +112,19 @@ public class RearrangeArray {
 
         for(String str : arr)
             System.out.print(str);
+        System.out.println();
+    }
+
+    // Rearrange an array such that ‘arr[j]’ becomes ‘i’ if ‘arr[i]’ is ‘j’
+    // https://www.geeksforgeeks.org/rearrange-array-arrj-becomes-arri-j/
+    static void interchange(int[] arr){
+        int[] out = arr.clone();
+
+        for(int i = 0; i<arr.length; ++i){
+            arr[out[i]] = i;
+        }
+
+        System.out.println(Arrays.toString(arr));
     }
 
     public static void main(String[] args) {
@@ -132,8 +145,11 @@ public class RearrangeArray {
         String[] arr3 = {"54", "546", "548", "60"};
         generateLargest(Arrays.asList(arr3));
 
-        System.out.println();
         String[] arr4 = {"1", "34", "3", "98", "9", "76", "45", "4"};
         generateLargest(Arrays.asList(arr4));
+
+        int[] arr5 = {1,3,0,2};
+        System.out.print(Arrays.toString(arr5) + " -> ");
+        interchange(arr5);
     }
 }
