@@ -17,20 +17,52 @@ import java.util.Arrays;
 // Problem Statement : https://www.geeksforgeeks.org/array-rotation/
 public class ArrayRotation {
     // Approach 1 : TC - O(n), SC - O(n)
-    public static int[] rotate(int[] arr, int d){
-        int[] temp = new int[arr.length];
-        for(int i = 0; i<arr.length; ++i){
-            if(i-d<0){
-                temp[arr.length+i-d] = arr[i];
-            } else {
-                temp[i-d] = arr[i];
-            }
+    public static int[] rightRotate(int[] arr, int k){
+        int[] out = new int[arr.length];
+        int n = arr.length;
+        k = k%n;
+
+        for(int i = 0; i<n; ++i){
+            // Find the indx where rotate element will go
+            int d = (i+k < n) ? i+k : i+k-n;
+
+            // Update corresponding index
+            out[d] = arr[i];
         }
 
-        return temp;
+        return out;
     }
 
-    // Approach 2 : Rotate one at a time. TC - O(n*d), SC - O(1)
+    // Approach 2 : Right Rotate in O(1) space and O(n) time complexity
+    public static int[] rotate(int[] nums, int rotations) {
+        if(nums.length==0)
+            return nums;
+
+        rotations = rotations%nums.length;
+        int start_idx = 0, prev = nums[start_idx], next = 0;
+
+        for(int steps = 1; steps<=rotations; ++steps){
+            int next_idx = start_idx+rotations;
+
+            while(next_idx<nums.length){
+                // Update corresponding index
+                next = nums[next_idx];
+                nums[next_idx] = prev;
+                prev = next;
+
+                next_idx += rotations;
+            }
+
+            start_idx = next_idx-nums.length;
+
+            prev = nums[start_idx];
+            nums[start_idx] = next;
+        }
+
+        return nums;
+    }
+
+    // Approach 3 : Rotate one at a time. TC - O(n*d), SC - O(1)
     static void leftRotate(int[] arr, int d)
     {
         for (int i = 0; i < d; i++)
@@ -46,7 +78,7 @@ public class ArrayRotation {
         arr[i] = temp;
     }
 
-    // Approach 3 : Find GCD and rotate by set. TC - O(n), SC - O(1)
+    // Approach 4 : Find GCD and rotate by set. TC - O(n), SC - O(1)
     static int gcd(int a, int b){
         if(b==0)
             return a;
@@ -122,21 +154,21 @@ public class ArrayRotation {
     }
 
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 4, 5, 6, 7, 8,9};
+        int[] arr = {1, 2, 3, 4, 5, 6, 7};
         System.out.println("Input : " + Arrays.toString(arr));
 
-        System.out.println("Approach 1 : " + Arrays.toString(rotate(arr, 3)));
+        System.out.println("Approach 1 : " + Arrays.toString(rightRotate(arr, 3)));
+
+        System.out.println("Approach 2 : " + Arrays.toString(arr) + " -> " + Arrays.toString(rotate(arr,3)));
 
         leftRotate(arr, 3);
-        System.out.println("Approach 2 : " + Arrays.toString(arr));
+        System.out.println("Approach 3 : " + Arrays.toString(arr) + " -> " + Arrays.toString(arr));
 
         rotateBySet(arr, 3);
-        System.out.println("Approach 3 : " + Arrays.toString(arr));
+        System.out.println("Approach 4 : " + Arrays.toString(arr) + " -> " + Arrays.toString(arr));
 
         System.out.println("Key " + 9 + " at index : " + search(arr, 9, 0 , arr.length));
-
         System.out.println("Pivot is at index : " + findPivot(arr, 0, arr.length));
-
         System.out.println("Number of rotations required to return to sorted array : " + findRotationCount(arr));
     }
 }
