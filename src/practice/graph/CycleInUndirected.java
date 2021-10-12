@@ -34,20 +34,22 @@ public class CycleInUndirected extends Graph{
         boolean[] visited = new boolean[size()];
         for(int i = 0; i<size(); ++i){
             if(!visited[i])
-                if(DFSUtil(i, -1, visited))
+                if(checkCycle(i, -1, visited))
                     return true;
         }
 
         return false;
     }
 
-    boolean DFSUtil(int i, int parent, boolean[] visited){
+    boolean checkCycle(int i, int parent, boolean[] visited){
+        if(visited[i])
+            return true;
+
         visited[i] = true;
-        for(int k : adjacencyList.get(i)){
-            if(!visited[k])
-                DFSUtil(k,i,visited);
-            else if(k!=parent)
-                return true;
+        for(int nxt : adjacencyList.get(i)){
+            if(nxt!=parent)
+                if(checkCycle(nxt, i, visited))
+                    return true;
         }
 
         return false;
